@@ -6,8 +6,9 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start:dev": "nodemon",
-    "build":"rimraf ./build && tsc",
-    "start":"npm run build && node build/index.js"
+    "build": "rimraf ./build && tsc",
+    "start": "npm run build && node build/index.js",
+    "lint": "eslint . --ext .ts"
   },
   "repository": {
     "type": "git",
@@ -22,6 +23,10 @@
   "homepage": "https://github.com/Xebec19/Hair-salon-backend#readme",
   "devDependencies": {
     "@types/node": "^15.12.2",
+    "@typescript-eslint/eslint-plugin": "^4.27.0",
+    "@typescript-eslint/parser": "^4.27.0",
+    "eslint": "^7.28.0",
+    "eslint-plugin-no-loops": "^0.3.0",
     "nodemon": "^2.0.7",
     "rimraf": "^3.0.2",
     "ts-node": "^10.0.0",
