@@ -10,6 +10,23 @@
         "plugin:@typescript-eslint/recommended"
     ],
     "rules":{
-        "no-console": 1
+        "no-console": 2,
+        "camelcase": 1,
+        "arrow-body-style": 1,
+        "no-const-assign": 2,
+        "no-duplicate-imports": 1,
+        "no-var": 1,
+        "prefer-arrow-callback": 1,
+        "prefer-const":1,
+        "prefer-destructuring":1,
+        "accessor-pairs":1,
+        "array-callback-return":1,
+        "block-scoped-var":1,
+        "complexity":1,
+        "eqeqeq":2,
+        "no-empty-function":1,
+        "no-empty-pattern":1,
+        "no-fallthrough":1,
+        "prefer-promise-reject-errors":1
     }
 }
