@@ -1,3 +1,4 @@
+import express from 'express';
 const router = express.Router();
 
 /**
@@ -8,4 +9,4 @@ const router = express.Router();
  */
 router.get('/',(req:any,res:any) => res.status(201).json({message:"ping ping ping"}));
 
-module.exports = router;
+export default router;
