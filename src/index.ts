@@ -2,13 +2,14 @@ import express from 'express'
 const app = express()
 const port = 3000
 
-import start from './routes/public/start';
 import auth from './routes/public/auth';
+import dbConnection from './setup/database';
 
 app.use(express.urlencoded({extended: false}));
 app.use(express.json());
 
-app.use('/public',start);
+dbConnection();
+
 app.use('/public/auth',auth)
 
 app.listen(port, () => {

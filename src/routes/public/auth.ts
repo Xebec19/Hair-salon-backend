@@ -1,29 +1,22 @@
 import express from "express";
-import * as jsonwt from "jsonwebtoken";
+
+import { login, register } from '../../controllers/authController';
 const router = express.Router();
 
 /**
- * @type GET
+ * @type POST
  * @path /public/auth/login
  * @description test response
  * @access PUBLIC
  */
-router.post("/login", async (req: any, res: any) => {
-  const { email, password } = req.body;
-  const payload = {
-    email: email,
-    password: password
-  }
-  jsonwt.sign(
-    payload,
-    "secret",
-    { expiresIn: '1d' },
-    (err, token) => {
-      if (err)
-        res.status(401).json({ message: "Something broke!!!", error: err })
-      res.status(201).json({ message: "Success", token: "Bearer " + token})
-    }
-  )
-})
+router.post("/login", (req, res) => login(req, res));
+
+/**
+ * @type POST
+ * @path /public/auth/register
+ * @description It registers new users
+ * @access PUBLIC
+ */
+router.post("/register",(req,res) => register(req,res));
 
 export default router;
