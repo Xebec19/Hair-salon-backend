@@ -1,20 +1,16 @@
-//dependencies
-import express from 'express';
+import express from 'express'
+const app = express()
+const port = 3000
 
-//routes PUBLIC
 import start from './routes/public/start';
-import login from './routes/public/login';
+import auth from './routes/public/auth';
 
+app.use(express.urlencoded({extended: false}));
+app.use(express.json());
 
-const app = express();
-const port = process.env.PORT || 3000;
-
-app.use(express.urlencoded({extended:false}));
-app.use(express.json);
-
-app.use('/public/start',start);
-app.use('/public/auth',login);
+app.use('/public',start);
+app.use('/public/auth',auth)
 
 app.listen(port, () => {
-  console.log(`Server listening at http://localhost:${port}`)
+  console.log(`App listening at http://localhost:${port}`)
 })
