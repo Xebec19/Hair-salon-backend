@@ -2,9 +2,7 @@ import bcrypt from 'bcryptjs'
 import * as jsonwt from "jsonwebtoken"
 import * as de from 'dotenv'
 const dotenv = de.config();
-
-
-import { saveUser } from './databaseControllers';
+import { saveUser } from './database.controller';
 
 export const login = async (req: any, res: any) => {
     const { email, password } = req.body;
