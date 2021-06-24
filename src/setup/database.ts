@@ -11,7 +11,7 @@ const dbConnection = async () => {
       useFindAndModify: false,
       useCreateIndex: true
     })
-    console.log('Database connected')
+    console.log(`Database connected at ${process.env.DB_URL_LOCAL}`)
   }
   catch (error) {
     console.log('Sorry, Database couldn\'t be connected because ', error);
