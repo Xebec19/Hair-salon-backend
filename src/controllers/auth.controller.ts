@@ -9,11 +9,14 @@ export const login = async (req: any, res: any) => {
     try {
         const check = await User.findOne({ email: email });
         if (!check) throw "No user found";
+        try{
         bcrypt.compare(password, check.password, async (err, match) => {
             if (err) throw "Some error occured while checking password!";
-            if (!match) throw "Password mismatch";
-            res.status(202).json({ message: "User found", status: 202 });
+            if (!match) res.status(400).json({message:"Password mismatch",status:400});
+            else res.status(202).json({ message: "User found", status: 202 });
         });
+    }
+    catch(err){res.status(400).json({message:"Internal error!!",status: 400 })}
     }
     catch (error) {
         console.log(error);
