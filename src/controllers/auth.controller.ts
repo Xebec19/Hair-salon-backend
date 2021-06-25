@@ -2,26 +2,25 @@ import bcrypt from 'bcryptjs'
 import * as jsonwt from "jsonwebtoken"
 import * as de from 'dotenv'
 const dotenv = de.config();
-import { saveUser, checkUser } from './database.controller';
+import User from '../models/User'
 
 export const login = async (req: any, res: any) => {
-    var result = await checkUser(req.body);
-    if (result === true) {
-        console.log('The value of result ', result);
-        res.status(201).json({ status: true });
-    } else res.status(401).json({ status: false });
+    const { email, password } = req.body;
+    try {
+        const check = await User.findOne({ email: email });
+        if (!check) throw "No user found";
+        bcrypt.compare(password, check.password, async (err, match) => {
+            if (err) throw "Some error occured while checking password!";
+            if (!match) throw "Password mismatch";
+            res.status(202).json({ message: "User found", status: 202 });
+        });
+    }
+    catch (error) {
+        console.log(error);
+        res.status(404).json({ message: "User not found!!", status: 404 })
+    }
 }
 
-export const register = async (req: any, res: any) => {
-    const data = {
-        name: req.body.name,
-        email: req.body.email,
-        password: req.body.password
-    }
-    const result = await saveUser(data);
-    if (result === true) {
-        res.status(201).json({ status: true });
-    }
-    res.status(401).json({ status: false });
+export const register = (req: any, res: any) => {
 
 }
