@@ -1,10 +1,7 @@
 import User from '../models/User'
 import bcrypt from 'bcryptjs'
 export const saveUser = async (data: {name:any,email:any,password:any}) => {
-    var flag;
-    var message;
     const {name,email,password} = data;
-    console.log(data);
     try {     
         const check = await User.findOne({email:`${email}`});
         if(check) throw "User already registered"
@@ -12,34 +9,35 @@ export const saveUser = async (data: {name:any,email:any,password:any}) => {
             if(err) throw err;
             const newUser = new User({email:email,name:name,password:hash});
             const result = await newUser.save();
-            message = "User successfully registered";
-            flag = true;
+            console.log('Success');
         });
     }
     catch (err) {
         console.log(err);
-        message = "Error while registering user : " + err; 
-        flag = false;
+        return false;
     }
-    return {message:message, status:flag};
+    return true;
 };
 export const checkUser = async (data: { email: any, password: any }) => {
     const { email, password } = data;
-    var flag;
-    var message;
     try {
-        const result = User.findOne({email: email});
-        if(!result) throw "User not registered";
-        bcrypt.compare(password, result.password, async(err, res) => { 
-            if(err) throw "Incorrect password" + err;
-            message = "Successfully logged in"
-            flag = true;
+        const check = await User.findOne({email: email});
+        console.log('The value is ',check);
+        if(!check) throw "User not registered";
+        console.log(check.password,password);
+
+        bcrypt.compare(password, check.password, async(err, boo) => { 
+            if(err) return false;
+            if(!boo){ 
+                console.log('Fired');
+                return 0;
+            }
         });
+
     }
     catch (error) {
-        console.log(error);
-        message = "User could not be logged in " + error;
-        flag = false;
+        console.log('Failure');
+        return false;
     }
-    return {message:message, status:flag};
+    return true;
 }
