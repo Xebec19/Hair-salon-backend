@@ -23,13 +23,15 @@
   },
   "homepage": "https://github.com/Xebec19/Hair-salon-backend#readme",
   "devDependencies": {
+    "@types/bcryptjs": "^2.4.2",
+    "@types/cors": "^2.8.10",
     "@types/express": "^4.17.12",
+    "@types/jsonwebtoken": "^8.5.2",
     "@types/node": "^15.12.3",
     "@types/passport-jwt": "^3.0.5",
+    "@types/passport-strategy": "^0.2.35",
     "@typescript-eslint/eslint-plugin": "^4.27.0",
-    "@typescript-eslint/parser": "^4.27.0",
-    "@types/bcryptjs": "^2.4.2",
-    "@types/cors": "^2.8.10"
+    "@typescript-eslint/parser": "^4.27.0"
   },
   "dependencies": {
     "bcryptjs": "^2.4.3",
